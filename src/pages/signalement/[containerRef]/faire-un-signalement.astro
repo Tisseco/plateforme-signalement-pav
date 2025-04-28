@@ -1,0 +1,40 @@
+---
+import { actions, isInputError } from 'astro:actions';
+import Layout from "../../../layouts/Layout.astro";
+
+const { containerRef } = Astro.params
+if (!containerRef) return Astro.redirect('/')
+
+const result = Astro.getActionResult(actions.sendReport);
+
+if (result && !result.error) return Astro.redirect('merci');
+
+const inputErrors = isInputError(result?.error) ? result.error.fields : {};
+---
+
+<Layout>
+  <form method="POST" action={actions.sendReport} enctype="multipart/form-data">
+    <fieldset>
+      <legend>Que voulez vous signaler ?</legend>
+      <div>
+        <input type="radio" name="reportType" id="filled" value="filled">
+        <label for="filled">Rempli</label>
+      </div>
+      
+      <div>
+        <input type="radio" name="reportType" id="degraded" value="degraded">
+        <label for="degraded">Dégradé</label>
+      </div>
+      
+      <div>
+        <input type="radio" name="reportType" id="both" value="both">
+        <label for="both">Les deux</label>
+      </div>
+      {inputErrors.reportType && inputErrors.reportType && <p>{inputErrors.reportType}</p>}
+    </fieldset>
+    <input type="file" accept="image/*" capture="camera" name="picture">
+    {inputErrors.picture && inputErrors.picture && <p>{inputErrors.picture}</p>}
+    <input hidden type="text" name="containerRef" value={containerRef}>
+    <button type="submit">Envoyer votre signalement</button>
+  </form>
+</Layout>

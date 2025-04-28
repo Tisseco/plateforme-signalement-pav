@@ -1,0 +1,57 @@
+---
+export const prerender = false
+
+import { containerInfosCache } from '../../../cache/containerInfos';
+import Layout from '../../../layouts/Layout.astro';
+import { fetchContainerInfos } from '../../../services/fetchContainerInfos';
+
+const { containerRef } = Astro.params
+
+if (!containerRef) return Astro.redirect('/')
+
+const isContainerInfosCached = containerInfosCache.getContainerInfosCached(containerRef)
+            
+if(!isContainerInfosCached) {
+    const containerInfos = await fetchContainerInfos(Astro.url.origin)(containerRef)
+
+    if (!containerInfos.success) throw containerInfos.error
+    if (containerInfos.success) containerInfosCache.cacheContainerInfos(containerRef, containerInfos.data)
+}
+
+const containerInfos = containerInfosCache.getContainerInfosCached(containerRef)
+console.log("🚀 ~ containerInfos:", containerInfos)
+
+if (!containerInfos) return Astro.redirect('/')
+
+---
+
+
+<style>
+	#map {
+		height: 180px;
+		width: 100%
+	}
+</style>
+
+<div id="data" data-latitude={containerInfos.coordinates.latitude} data-longitude={containerInfos.coordinates.longitude}>
+    <script>
+        import L from 'leaflet'
+        import "leaflet/dist/leaflet.css"
+
+        const monElement = document.getElementById('data');
+        const latitude = monElement?.dataset.latitude;
+        const longitude = monElement?.dataset.longitude;
+
+        const map = L.map('map').setView([latitude, longitude], 13);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+    </script>
+
+<Layout>
+    <div id="map"></div>
+	<h1>{containerInfos.coordinates.longitude}</h1>
+    <a href={`/signalement/${containerRef}/faire-un-signalement`}>Faire un signalement</a>
+</Layout>
+</div>
