@@ -1,18 +1,18 @@
 // @ts-check
 import { defineConfig, envField } from 'astro/config';
-// import netlify from '@astrojs/netlify';
+import netlify from '@astrojs/netlify';
 import tailwindcss from "@tailwindcss/vite";
-import node from '@astrojs/node';
+// import node from '@astrojs/node';
 import react from "@astrojs/react";
 import 'dotenv/config';
 
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
-  // adapter: netlify(),
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter: netlify(),
+  // adapter: node({
+  //   mode: 'standalone',
+  // }),
 
   env: {
     schema: {
