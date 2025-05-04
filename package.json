@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/netlify": "^6.3.1",
+    "@astrojs/node": "^9.2.1",
     "@astrojs/react": "^4.2.5",
     "@headlessui/react": "^2.2.2",
     "@heroicons/react": "^2.2.0",
@@ -18,9 +19,18 @@
     "@types/react-dom": "^19.1.2",
     "astro": "^5.7.6",
     "discord.js": "^14.18.0",
+    "dotenv": "^16.5.0",
     "leaflet": "^1.9.4",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-leaflet": "5.0.0-rc.2",
+    "resend": "^4.5.0",
+    "sanitize-html": "^2.16.0",
+    "sharp": "^0.34.1",
     "tailwindcss": "^4.1.4"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.17",
+    "@types/sanitize-html": "^2.15.0"
   }
 }

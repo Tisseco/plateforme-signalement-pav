@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import TissecoLogo from '../assets/tisseco.png'; // Image est en 1600x900
+import FooterSection from "./FooterSection.astro";
 ---
 
 <!-- pt-16 sm:pt-24 lg:pt-32 -->
@@ -45,46 +46,36 @@ import TissecoLogo from '../assets/tisseco.png'; // Image est en 1600x900
         </div>
         <div class="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
-            <div>
-              <h3 class="text-sm/6 font-semibold text-gray-900">Services</h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li>
-                  <a href="#" class="text-sm/6 text-gray-600 hover:text-gray-900">Trouver un point d'apport volontaire</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-10 md:mt-0">
-              <h3 class="text-sm/6 font-semibold text-gray-900">Support</h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li>
-                  <a href="#" class="text-sm/6 text-gray-600 hover:text-gray-900">Nous contacter</a>
-                </li>
-              </ul>
-            </div>
+            <FooterSection
+              sectionTitle={"Services"}
+              links={[
+                { href: "#", text:"Trouver un point d'apport volontaire" }
+              ]}
+            />
+            <FooterSection
+              className="mt-10 md:mt-0"
+              sectionTitle={"Support"}
+              links={[
+                { href: "nous-contacter", text:"Nous contacter" }
+              ]}
+            />
           </div>
           <div class="md:grid md:grid-cols-2 md:gap-8">
-            <div>
-              <h3 class="text-sm/6 font-semibold text-gray-900">Plan du site</h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li>
-                  <a href="#" class="text-sm/6 text-gray-600 hover:text-gray-900">Accueil</a>
-                </li>
-                <li>
-                  <a href="#" class="text-sm/6 text-gray-600 hover:text-gray-900">À propos</a>
-                </li>
-              </ul>
-            </div>
-            <div class="mt-10 md:mt-0">
-              <h3 class="text-sm/6 font-semibold text-gray-900">Mentions légales</h3>
-              <ul role="list" class="mt-6 space-y-4">
-                <li>
-                  <a href="#" class="text-sm/6 text-gray-600 hover:text-gray-900">Conditions d'utilisation</a>
-                </li>
-                <li>
-                  <a href="#" class="text-sm/6 text-gray-600 hover:text-gray-900">Politique de confidentialité</a>
-                </li>
-              </ul>
-            </div>
+            <FooterSection
+              sectionTitle={"Plan du site"}
+              links={[
+                { href: "#", text:"Accueil" },
+                { href: "#", text:"À propos" }
+              ]}
+            />
+            <FooterSection
+              className="mt-10 md:mt-0"
+              sectionTitle={"Mentions légales"}
+              links={[
+                { href: "conditions-d-utilisation", text:"Conditions d'utilisation" },
+                { href: "politique-de-confidentialité", text:"Politique de confidentialité" }
+              ]}
+            />
           </div>
         </div>
       </div>
@@ -93,4 +84,3 @@ import TissecoLogo from '../assets/tisseco.png'; // Image est en 1600x900
       </div>
     </div>
 </footer>
-  

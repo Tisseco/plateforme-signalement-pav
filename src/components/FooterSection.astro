@@ -1,0 +1,21 @@
+---
+import FooterSectionLink from './FooterSectionLink.astro';
+
+interface Props {
+    className?: string;
+    sectionTitle: string;
+    links: {
+        href: string;
+        text: string;
+    }[]
+}
+
+const { className, sectionTitle, links } = Astro.props
+---
+
+<section class={className}>
+    <h1 class="text-sm/6 font-semibold text-gray-900">{sectionTitle}</h1>
+    <ul role="list" class="mt-6 space-y-4">
+        {links.map(link => <FooterSectionLink href={link.href} text={link.text} />)}
+    </ul>
+</section>

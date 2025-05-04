@@ -3,7 +3,6 @@ import type { APIRoute } from "astro";
 export const GET: APIRoute = ({ request }) => {
     const url = new URL(request.url)
     const containerRef = url.searchParams.get('containerRef')
-
     // fetch container geoposition by his ref
 
     return new Response(
